@@ -14,9 +14,6 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private float minSpeedBeforeIdle = 0.2f;
 
-    [SerializeField]
-    private Animator carAnimator;
-
     public Direction CurrentDirection { get; set; } = Direction.Idle;
 
     [SerializeField]
@@ -43,8 +40,6 @@ public class CarController : MonoBehaviour
         if (carRigidBody.velocity.magnitude <= minSpeedBeforeIdle)
         {
             CurrentDirection = Direction.Idle;
-            ApplyAnimatorState(Direction.Idle);
-
             AddWheelsSpeed(0);
         }
     }
@@ -55,75 +50,35 @@ public class CarController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow) || CurrentDirection == Direction.MoveForward)
         {
-            ApplyAnimatorState(Direction.MoveForward);
             carRigidBody.AddForce(transform.forward * speed, ForceMode.VelocityChange);
-
             AddWheelsSpeed(speed);
         }
 
         if (Input.GetKey(KeyCode.DownArrow) || CurrentDirection == Direction.MoveBackward)
         {
-            ApplyAnimatorState(Direction.MoveBackward);
             carRigidBody.AddForce(-transform.forward * speed, ForceMode.VelocityChange);
-
             AddWheelsSpeed(-speed);
         }
 
         if ((Input.GetKey(KeyCode.LeftArrow) && canApplyTorque()) || CurrentDirection == Direction.TurnLeft)
         {
-            ApplyAnimatorState(Direction.TurnLeft);
             carRigidBody.AddTorque(transform.up * -torque);
         }
 
         if (Input.GetKey(KeyCode.RightArrow) && canApplyTorque() || CurrentDirection == Direction.TurnRight)
         {
-            ApplyAnimatorState(Direction.TurnRight);
             carRigidBody.AddTorque(transform.up * torque);
         }
     }
 
     void AddWheelsSpeed(float speed)
     {
-        foreach (var w in wheels)
+        foreach (var wheel in wheels)
         {
-            w.WheelSpeed = speed;
+            wheel.WheelSpeed = speed;
         }
     }
 
-    void ApplyAnimatorState(Direction direction)
-    {
-        return;
-
-        carAnimator.SetBool(direction.ToString(), true);
-
-        switch (direction)
-        {
-            case Direction.Idle:
-                carAnimator.SetBool(Direction.MoveBackward.ToString(), false);
-                carAnimator.SetBool(Direction.MoveForward.ToString(), false);
-                carAnimator.SetBool(Direction.TurnLeft.ToString(), false);
-                carAnimator.SetBool(Direction.TurnRight.ToString(), false);
-                break;
-            case Direction.MoveForward:
-                carAnimator.SetBool(Direction.Idle.ToString(), false);
-                carAnimator.SetBool(Direction.MoveBackward.ToString(), false);
-                carAnimator.SetBool(Direction.TurnLeft.ToString(), false);
-                carAnimator.SetBool(Direction.TurnRight.ToString(), false);
-                break;
-            case Direction.MoveBackward:
-                carAnimator.SetBool(Direction.Idle.ToString(), false);
-                carAnimator.SetBool(Direction.MoveForward.ToString(), false);
-                carAnimator.SetBool(Direction.TurnLeft.ToString(), false);
-                carAnimator.SetBool(Direction.TurnRight.ToString(), false);
-                break;
-            case Direction.TurnLeft:
-                carAnimator.SetBool(Direction.TurnRight.ToString(), false);
-                break;
-            case Direction.TurnRight:
-                carAnimator.SetBool(Direction.TurnLeft.ToString(), false);
-                break;
-        }
-    }
 
     public bool canApplyTorque()
     {
