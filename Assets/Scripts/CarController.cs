@@ -22,6 +22,8 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private Rigidbody carRigidBody;
 
+    private CarWheel[] wheels;
+
     public enum Direction
     {
         Idle,
@@ -31,12 +33,19 @@ public class CarController : MonoBehaviour
         TurnRight
     }
 
+    private void Awake()
+    {
+        wheels = GetComponentsInChildren<CarWheel>();
+    }
+
     void Update()
     {
         if (carRigidBody.velocity.magnitude <= minSpeedBeforeIdle)
         {
             CurrentDirection = Direction.Idle;
             ApplyAnimatorState(Direction.Idle);
+
+            AddWheelsSpeed(0);
         }
     }
 
@@ -48,12 +57,16 @@ public class CarController : MonoBehaviour
         {
             ApplyAnimatorState(Direction.MoveForward);
             carRigidBody.AddForce(transform.forward * speed, ForceMode.VelocityChange);
+
+            AddWheelsSpeed(speed);
         }
 
         if (Input.GetKey(KeyCode.DownArrow) || CurrentDirection == Direction.MoveBackward)
         {
             ApplyAnimatorState(Direction.MoveBackward);
             carRigidBody.AddForce(-transform.forward * speed, ForceMode.VelocityChange);
+
+            AddWheelsSpeed(-speed);
         }
 
         if ((Input.GetKey(KeyCode.LeftArrow) && canApplyTorque()) || CurrentDirection == Direction.TurnLeft)
@@ -66,6 +79,14 @@ public class CarController : MonoBehaviour
         {
             ApplyAnimatorState(Direction.TurnRight);
             carRigidBody.AddTorque(transform.up * torque);
+        }
+    }
+
+    void AddWheelsSpeed(float speed)
+    {
+        foreach (var w in wheels)
+        {
+            w.WheelSpeed = speed;
         }
     }
 
