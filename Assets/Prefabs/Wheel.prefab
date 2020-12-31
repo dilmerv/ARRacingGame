@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1248877725206591163}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.778, y: -0.132, z: 0.136}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_Children:
   - {fileID: 1248877725466679129}
   - {fileID: 1248877726592614587}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d61d0ee2d53e284e808d2e34c5b58dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheelSpeed: 10
+  SpeedOffset: 10
 --- !u!1 &1248877725466679106
 GameObject:
   m_ObjectHideFlags: 0
@@ -5346,7 +5346,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248877726592614588}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 336a0e8afb37c41c5a844950d6a1f27e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
