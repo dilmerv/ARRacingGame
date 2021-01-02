@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using DilmerGames.Core.Singletons;
+using UnityEngine;
 
-public class CarController : MonoBehaviour
+public class CarController : Singleton<CarController>
 {
     [SerializeField]
     private float speed = 1.0f;
@@ -14,10 +15,8 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private float minSpeedBeforeIdle = 0.2f;
 
-    public Direction CurrentDirection { get; set; } = Direction.Idle;
-
     [SerializeField]
-    private Rigidbody carRigidBody;
+    private Rigidbody carRigidBody = null;
 
     private CarWheel[] wheels;
 
@@ -30,7 +29,7 @@ public class CarController : MonoBehaviour
         TurnRight
     }
 
-    private void Awake()
+    void Awake()
     {
         wheels = GetComponentsInChildren<CarWheel>();
     }
@@ -39,36 +38,32 @@ public class CarController : MonoBehaviour
     {
         if (carRigidBody.velocity.magnitude <= minSpeedBeforeIdle)
         {
-            CurrentDirection = Direction.Idle;
             AddWheelsSpeed(0);
         }
     }
 
-    void FixedUpdate() => ApplyMovement();
-
-    public void ApplyMovement()
+    public void Accelerate()
     {
-        if (Input.GetKey(KeyCode.UpArrow) || CurrentDirection == Direction.MoveForward)
-        {
-            carRigidBody.AddForce(transform.forward * speed, ForceMode.VelocityChange);
-            AddWheelsSpeed(speed);
-        }
+        carRigidBody.AddForce(transform.forward * speed, ForceMode.Acceleration);
+        AddWheelsSpeed(speed);
+    }
 
-        if (Input.GetKey(KeyCode.DownArrow) || CurrentDirection == Direction.MoveBackward)
-        {
-            carRigidBody.AddForce(-transform.forward * speed, ForceMode.VelocityChange);
-            AddWheelsSpeed(-speed);
-        }
+    public void Reverse()
+    {
+        carRigidBody.AddForce(-transform.forward * speed, ForceMode.Acceleration);;
+        AddWheelsSpeed(-speed);
+    }
 
-        if ((Input.GetKey(KeyCode.LeftArrow) && canApplyTorque()) || CurrentDirection == Direction.TurnLeft)
-        {
+    public void TurnLeft()
+    {
+        if(canApplyTorque())
             carRigidBody.AddTorque(transform.up * -torque);
-        }
+    }
 
-        if (Input.GetKey(KeyCode.RightArrow) && canApplyTorque() || CurrentDirection == Direction.TurnRight)
-        {
+    public void TurnRight()
+    {
+        if(canApplyTorque())
             carRigidBody.AddTorque(transform.up * torque);
-        }
     }
 
     void AddWheelsSpeed(float speed)
@@ -79,8 +74,7 @@ public class CarController : MonoBehaviour
         }
     }
 
-
-    public bool canApplyTorque()
+    bool canApplyTorque()
     {
         Vector3 velocity = carRigidBody.velocity;
         return Mathf.Abs(velocity.x) >= minSpeedBeforeTorque || Mathf.Abs(velocity.z) >= minSpeedBeforeTorque;
