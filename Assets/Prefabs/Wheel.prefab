@@ -1336,12 +1336,7 @@ GameObject:
   - component: {fileID: 1248877726592614584}
   - component: {fileID: 1248877726592614585}
   - component: {fileID: 1248877726592614590}
-<<<<<<< HEAD
-  - component: {fileID: 1248877726592614591}
-  - component: {fileID: 1969377831322352241}
-=======
   - component: {fileID: 4148051855233120984}
->>>>>>> 03bf885b2aba6eed4879c76c9931bd537074a5ca
   m_Layer: 0
   m_Name: Tire
   m_TagString: Untagged
@@ -5374,39 +5369,3 @@ WheelCollider:
     m_AsymptoteValue: 1
     m_Stiffness: 0
   m_Enabled: 1
-<<<<<<< HEAD
-  serializedVersion: 2
-  m_Radius: 0.28333324
-  m_Center: {x: 0.0026948452, y: -0.000536561, z: -0.0009238124}
---- !u!146 &1969377831322352241
-WheelCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248877726592614588}
-  m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.27
-  m_SuspensionSpring:
-    spring: 0.5
-    damper: 0.5
-    targetPosition: 0
-  m_SuspensionDistance: 0
-  m_ForceAppPointDistance: 0.1
-  m_Mass: 20
-  m_WheelDampingRate: 5
-  m_ForwardFriction:
-    m_ExtremumSlip: 1500
-    m_ExtremumValue: 10
-    m_AsymptoteSlip: 1
-    m_AsymptoteValue: 1
-    m_Stiffness: 5
-  m_SidewaysFriction:
-    m_ExtremumSlip: 1000
-    m_ExtremumValue: 100
-    m_AsymptoteSlip: 1
-    m_AsymptoteValue: 1
-    m_Stiffness: 0.5
-  m_Enabled: 1
-=======
->>>>>>> 03bf885b2aba6eed4879c76c9931bd537074a5ca

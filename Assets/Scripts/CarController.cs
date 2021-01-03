@@ -31,6 +31,9 @@ public class CarController : MonoBehaviour
     void Awake()
     {
         wheels = GetComponentsInChildren<CarWheel>();
+#if UNITY_EDITOR
+        PlayerInputController.Instance.Bind(this);
+#endif
     }
 
     void Update()
