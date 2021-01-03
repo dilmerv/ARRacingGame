@@ -1,7 +1,6 @@
-﻿using DilmerGames.Core.Singletons;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CarController : Singleton<CarController>
+public class CarController : MonoBehaviour
 {
     [SerializeField]
     private float speed = 1.0f;
