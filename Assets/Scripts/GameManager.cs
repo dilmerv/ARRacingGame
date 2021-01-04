@@ -10,14 +10,11 @@ public class GameManager : MonoBehaviour
     private Camera arCamera = null;
 
     [SerializeField]
-    private LayerMask layersToInclude;
+    private LayerMask layersToInclude = default;
 
     private GameObject carControllerGo = null;
 
-    void Awake() 
-    {
-        EnhancedTouchSupport.Enable();
-    }
+    void Awake() => EnhancedTouchSupport.Enable();
 
     void Update()
     {
@@ -38,8 +35,8 @@ public class GameManager : MonoBehaviour
 
                 if (hasHit && carControllerGo == null)
                 {
-                    Logger.Instance.LogInfo("Car Creation...");
                     carControllerGo = Instantiate(carPrefab, hit.point, Quaternion.identity);
+
                     Logger.Instance.LogInfo("Car Created...");
                     
                     var carController = carControllerGo.GetComponentInChildren<CarController>();

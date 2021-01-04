@@ -2,6 +2,7 @@
 using DilmerGames.Core.Singletons;
 using TMPro;
 using UnityEngine;
+using System;
 
 public class Logger : Singleton<Logger>
 {   
@@ -18,24 +19,30 @@ public class Logger : Singleton<Logger>
     {
         debugAreaText.enabled = enableDebug;
         enabled = enableDebug;
+
+        if(enabled)
+        {
+            debugAreaText.text += $"<color=\"white\">{DateTime.Now.ToString("HH:mm:ss.fff")} {this.name} enabled</color>\n";
+        }
     }
 
     public void LogInfo(string message)
     {
         ClearLines();
-        debugAreaText.text += $"<color=\"green\">{message}</color>\n";
+
+        debugAreaText.text += $"<color=\"green\">{DateTime.Now.ToString("HH:mm:ss.fff")} {message}</color>\n";
     }
 
     public void LogError(string message)
     {
         ClearLines();
-        debugAreaText.text += $"<color=\"red\">{message}</color>\n";
+        debugAreaText.text += $"<color=\"red\">{DateTime.Now.ToString("HH:mm:ss.fff")} {message}</color>\n";
     }
 
     public void LogWarning(string message)
     {
         ClearLines();
-        debugAreaText.text += $"<color=\"yellow\">{message}</color>\n";
+        debugAreaText.text += $"<color=\"yellow\">{DateTime.Now.ToString("HH:mm:ss.fff")} {message}</color>\n";
     }
 
     private void ClearLines()
