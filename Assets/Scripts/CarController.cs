@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
@@ -16,6 +17,16 @@ public class CarController : MonoBehaviour
 
     [SerializeField]
     private Rigidbody carRigidBody = null;
+
+    #region Stats
+
+    [SerializeField]
+    private bool showStats = false;
+
+    [SerializeField]
+    private TextMeshProUGUI speedText = null;
+
+    #endregion
 
     private CarWheel[] wheels;
 
@@ -41,6 +52,16 @@ public class CarController : MonoBehaviour
         if (carRigidBody.velocity.magnitude <= minSpeedBeforeIdle)
         {
             AddWheelsSpeed(0);
+        }
+
+        if(showStats)
+        {
+            if(speedText != null)
+            {
+                //magnitude is in 1 meter per second
+                //convert it to miles per hour by * 2.236936
+                speedText.text = $"{string.Format("{0:0.#}", carRigidBody.velocity.magnitude * 2.236936)} Mph";
+            }
         }
     }
 
