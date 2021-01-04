@@ -4,19 +4,22 @@ using UnityEngine.InputSystem.EnhancedTouch;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject carPrefab;
+    private GameObject carPrefab = null;
 
     [SerializeField]
-    private Camera arCamera;
+    private Camera arCamera = null;
 
     [SerializeField]
     private LayerMask layersToInclude;
 
-    private GameObject carController;
+    private GameObject carControllerGo = null;
 
-    private void Awake() => EnhancedTouchSupport.Enable();
+    void Awake() 
+    {
+        EnhancedTouchSupport.Enable();
+    }
 
-    private void Update()
+    void Update()
     {
         var activeTouches = UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches;
 
@@ -33,10 +36,16 @@ public class GameManager : MonoBehaviour
                 var ray = arCamera.ScreenPointToRay(touch.screenPosition);
                 var hasHit = Physics.Raycast(ray, out var hit, float.PositiveInfinity, layersToInclude);
 
-                if (hasHit && carController == null)
+                if (hasHit && carControllerGo == null)
                 {
-                    carController = Instantiate(carPrefab, hit.point, Quaternion.identity);
-                    PlayerInputController.Instance.Bind(carController.GetComponent<CarController>());
+                    Logger.Instance.LogInfo("Car Creation...");
+                    carControllerGo = Instantiate(carPrefab, hit.point, Quaternion.identity);
+                    Logger.Instance.LogInfo("Car Created...");
+                    
+                    var carController = carControllerGo.GetComponentInChildren<CarController>();
+                    PlayerInputController.Instance.Bind(carController);
+
+                    Logger.Instance.LogInfo("PlayerInputController Bound...");
                 }
             }
         }

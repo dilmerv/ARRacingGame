@@ -1,10 +1,11 @@
 ﻿using DilmerGames.Core.Singletons;
 using UnityEngine.InputSystem;
+using UnityEngine;
 
 public class PlayerInputController : Singleton<PlayerInputController>
 {
     private bool turnLeft, turnRight, accelerate, reverse;
-
+    
     private CarController carController;
 
     public void Bind(CarController carController)
@@ -14,6 +15,11 @@ public class PlayerInputController : Singleton<PlayerInputController>
 
     void FixedUpdate() 
     {
+        if(carController == null) 
+        {
+            return;
+        }
+
         if(accelerate)
         {
             carController.Accelerate();
@@ -32,11 +38,27 @@ public class PlayerInputController : Singleton<PlayerInputController>
         }
     }
 
-    public void OnTurnLeft(InputValue inputValue) => turnLeft = inputValue.isPressed;
+    public void OnTurnLeft(InputValue inputValue) 
+    { 
+        turnLeft = inputValue.isPressed;
+        Logger.Instance.LogInfo($"OnTurnLeft...{turnLeft}");
+    }
 
-    public void OnTurnRight(InputValue inputValue) => turnRight = inputValue.isPressed;
+    public void OnTurnRight(InputValue inputValue) 
+    { 
+        turnRight = inputValue.isPressed;
+        Logger.Instance.LogInfo($"OnTurnRight...{turnRight}");
+    }
 
-    public void OnAccelerate(InputValue inputValue) => accelerate = inputValue.isPressed;
+    public void OnAccelerate(InputValue inputValue) 
+    {
+        accelerate = inputValue.isPressed;
+        Logger.Instance.LogInfo($"OnAccelerate...{accelerate}");
+    } 
 
-    public void OnReverse(InputValue inputValue) => reverse = inputValue.isPressed;
+    public void OnReverse(InputValue inputValue) 
+    {
+        reverse = inputValue.isPressed;
+        Logger.Instance.LogInfo($"OnReverse...{reverse}");
+    }
 }

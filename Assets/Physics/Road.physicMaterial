@@ -6,7 +6,7 @@ PhysicMaterial:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ramp
+  m_Name: Road
   dynamicFriction: 0.2
   staticFriction: 0.2
   bounciness: 0
