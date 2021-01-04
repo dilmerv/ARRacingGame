@@ -5059,9 +5059,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4271bf3574537f46a90bef4b6b4a784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
-  torque: 30
-  minSpeedBeforeTorque: 0.01
+  speed: 10
+  torque: 0.5
+  minSpeedBeforeTorque: 0.2
   minSpeedBeforeIdle: 0.2
   carRigidBody: {fileID: 2575662788260421658}
 --- !u!54 &2575662788260421658
