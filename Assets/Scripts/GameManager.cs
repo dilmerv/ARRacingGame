@@ -14,7 +14,10 @@ public class GameManager : MonoBehaviour
 
     private GameObject carControllerGo = null;
 
-    void Awake() => EnhancedTouchSupport.Enable();
+    void Awake() 
+    {
+        EnhancedTouchSupport.Enable();
+    }
 
     void Update()
     {

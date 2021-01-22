@@ -1,0 +1,104 @@
+
+
+Installation:
+    1. Install AR Foundation >= 3.0.1 and XR providers (ARKit XR Plugin, ARCore XR Plugin, etc.) via Package Manager and ENABLE PROVIDERS(!) in Project Settings -> XR Plug-in Management. 
+            Please choose providers compatible with your AR Foundation version.
+    2. Check that your existing AR project compiles and works correctly on your AR device.
+    3. Import the plugin into your project.
+    4. The plugin will install itself automatically after importing it to Unity.
+            If automatic installation fails, please fix all Console errors, then select an 'Assets/Plugins/ARFoundationRemoteInstaller/Installer.asset' object and press 'Install Plugin' button.
+    5. Add this folder to version control ignore list (.gitignore will be modified automatically): "Packages/com.kyrylokuzyk.arfoundationremote".
+            If your repository is private AND you've purchased the license for every team member who will use the plugin, only then you can add plugin's source code to version control system.
+            More info about multiple licenses (seats) here: https://support.unity3d.com/hc/en-us/articles/208601846
+
+
+How to use:
+    1. Enable 'AR Foundation Remote' provider in 'Project Settings -> XR Plug-in Management -> PC, Mac & Linux Standalone'.
+            If you can't enable this checkbox, please delete the file 'Assets/XR/Loaders/AR Foundation Remote Loader.asset' and try again.
+    2. If you're planning to use ARKit Object Tracking, add all your object reference libraries to 'Assets/Plugins/ARFoundationRemoteInstaller/Resources/ObjectTrackingLibraries'
+    3. Switch your project to the appropriate build target and press 'Assets/Plugins/ARFoundationRemoteInstaller/Installer/Install AR Companion app' button.
+            If your build target requires extension for making builds, add this extension to optionalCompanionAppExtension field.
+            Please DO NOT modify the 'Assets/Plugins/ARFoundationRemoteInstaller/Scenes/ARCompanion' scene.
+    4. Run 'AR Companion' app on your AR device.
+    5. Enter 'AR Companion' app's IP in 'Assets/Plugins/ARFoundationRemoteInstaller/Resources/Settings.asset/AR Companion App IP'.
+    6. Run AR scene of your choice in the Editor (or any example scene from 'Assets/Plugins/ARFoundationRemoteInstaller/Scenes/Examples').
+            iOS: if connection to your iOS device fails, please try to configure Static IP Configuration: https://www.mobi-pos.com/web/guide/settings/static-ip-configuration
+            Your AR device will NOT reflect changes made in Unity Editor. ARCompanion app serves only the purpose of sending AR data and touches back to the Editor.
+            Please note that all example scenes consist of pure ARFoundation components. No additional setup was needed for these scenes to work with the plugin.
+    7. Leave an honest review on the Asset Store and on forum :)
+
+
+FAQ:  
+    Q: How to update the plugin to a newer version?
+    A: Press 'Installer/Un-install Plugin' button, delete the folder 'Assets/Plugins/ARFoundationRemoteInstaller', import the new version, and make a new build of AR Companion app by pressing 'Installer/Install AR Companion App' button.
+    
+    Q: I receive the compilation error in ARMeshManager.cs: 'The type or namespace name 'ARFoundationRemote' could not be found'.
+    A: Press the 'Installer/Apply AR Foundation Fixes' button.
+        More info about this issue: https://forum.unity.com/threads/898433/page-7#post-6607240
+    
+    Q: How to install the plugin on multiple development machines in an open source project?
+    A: Please don't commit plugin files to your public repository.
+        Instead, install the plugin on every development machine separately after purchasing the additional licenses: https://support.unity3d.com/hc/en-us/articles/208601846
+
+    Q: Can I build AR Companion app from another (or newly created) project?
+    A: Yes! Please ensure that your project has the same version of Unity and same packages (AR Foundation, AR Subsystems, etc.). 
+    
+    Q: Image Tracking on Android is working unreliably.
+    A: The plugin sends reference images from Editor and adds them on AR device at runtime with ScheduleAddImageJob(). 
+        While on iOS everything works perfectly fine, image tracking on Android with AR Foundation 4.0.x works unreliably. 
+        https://github.com/Unity-Technologies/arfoundation-samples/issues/359 
+        https://github.com/Unity-Technologies/arfoundation-samples/issues/586
+        Solutions:
+            1. Please use ARCore 3.x.x or ARCore 4.1.x.
+            2. Or add your image libraries to 'Settings/Embedded Image Libraries' and make a new build of the AR Companion app.
+    
+    Q: I'm trying to run AR Foundation Samples scenes and input remoting doesn't work in SimpleAR and PlaneOcclusion scenes.
+    A: These scenes use PlaceOnPlane.cs script which has #if UNITY_EDITOR define. Please remove this define to enable touch input in Editor.
+ 
+    Q: How to connect iOS device to macOS Editor by wire?
+    A: Typically, one of the IP addresses displayed in ARCompanion app is an IP of wired connection. Please disable Wi-Fi and there should be one IP left that corresponds to the wired connection.
+    
+    Q: How to change background video resolution?
+    A: To change Editor camera background settings, please go to Assets/Plugins/ARFoundationRemoteInstaller/Resources/Settings.asset.
+        Setting higher resolution scale will result in higher latency and lower frames-per-second.
+        
+    Q: Can I write a custom background video shader and test in the Editor?
+    A:  iOS + Windows Unity Editor:
+            Make a copy of ARKitBackgroundCustom.shader and modify it as you wish.
+        iOS + macOS Unity Editor:
+            Make a copy of ARKitBackground.shader and modify it as you wish.
+            Please enable 'Project Settings/Player/PC, Mac & .../Other Settings/Rendering/Metal Editor Support'. 
+        Android: 
+            Unity Editor doesn't support shader features specific for Android (GL_OES_EGL_image_external_essl3, samplerExternalOES), so to test your custom video shader in Editor, 
+                this shader should be compatible with both Android and Unity Editor. 
+                But, as far as I know, it's not possible to write such shader because Windows/macOS Unity Editor can't run GLSLPROGRAM shaders.
+
+    Q: I get this warning: 'No active UnityEngine.XR.XRInputSubsystem is available'.
+    A: This warning is harmless and can be ignored. It's not possible to create XRInputSubsystem in Editor and Unity warns that it's missing.
+        If you get other 'No active SUBSYSTEM_NAME is available', it means the plugin does not currently support this AR feature.
+        
+    Q: How to write a custom camera pose driver and test in the Editor?
+    A: Please add this line on top of your script to be able to pull the pose of XRNode.CenterEye:
+        using InputTracking = ARFoundationRemote.Runtime.InputTracking;
+
+
+How to uninstall:
+    1. Press 'Installer/Delete AR Companion app build folder' button.
+    2. Press 'Un-install Plugin' button.
+    3. Delete the folder: Assets/Plugins/ARFoundationRemoteInstaller.
+
+
+Compatibility of AR Foundation and different Unity versions.
+    (Not actually related to the plugin, but this is the most suitable place to put this compatibility info).
+    Unity 2019.2.0: 
+        XR Management [3.0.4-preview.1] - this is the only version that works with AR Foundation Editor Remote plugin.
+        ARKit [3.0.1]
+        ARCore [3.0.1 : 3.1.3]
+    Unity 2019.4.16:
+        ARKit [3.0.1 : 4.1.1]
+        ARCore [3.0.1 : 4.0.8]
+    Unity 2020.1:
+        ARKit [3.0.1 : 4.1.1]
+        ARCore [3.1.5 : 4.1.1]
+    Unity 2020.2:
+        ARKit/ARCore [4.0.2 : 4.1.1]

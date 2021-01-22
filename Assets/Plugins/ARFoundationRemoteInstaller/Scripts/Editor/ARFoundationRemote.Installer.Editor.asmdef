@@ -1,0 +1,25 @@
+{
+    "name": "ARFoundationRemote.Installer.Editor",
+    "references": [
+        "GUID:df053a1a69e8040ee88d52204e1cd5b9",
+        "GUID:7c7bd0e05e85b48f38983cf34da6878c",
+        "GUID:e40ba710768534012815d3193fa296cb"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.kyrylokuzyk.arfoundationremote",
+            "expression": "1.0.0",
+            "define": "AR_FOUNDATION_REMOTE_INSTALLED"
+        }
+    ],
+    "noEngineReferences": false
+}
