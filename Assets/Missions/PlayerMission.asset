@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa82a500896946898e42f71fe223704, type: 3}
+  m_Name: PlayerMission
+  m_EditorClassIdentifier: 
+  PlayerItems:
+  - ItemType: 1
+    Priority: 1
+    MinDistance: 0
+    PlacementState: 2
+    Prefab: {fileID: 1842103077137166150, guid: 9eda4f8c095ae174fbe560a3e93cb8a7,
+      type: 3}
+  - ItemType: 2
+    Priority: 2
+    MinDistance: 0
+    PlacementState: 2
+    Prefab: {fileID: 850315960405456276, guid: 8860a34c7551f42be957dff998749645, type: 3}
+  - ItemType: 2
+    Priority: 3
+    MinDistance: 0
+    PlacementState: 2
+    Prefab: {fileID: 850315960405456276, guid: 8860a34c7551f42be957dff998749645, type: 3}

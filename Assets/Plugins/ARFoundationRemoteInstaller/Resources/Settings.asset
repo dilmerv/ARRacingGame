@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd607c3f010ab45a29ecfcf8d5a898ef, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  ARCompanionAppIP: 192.168.0.
+  ARCompanionAppIP: 192.168.0.102
   editorGameViewSettings:
     resolutionScale: 0.33333334
     maxEditorViewFps: 10
@@ -33,6 +33,19 @@ MonoBehaviour:
       sendVertices: 1
       sendNormals: 1
       sendARKitBlendshapes: 1
+  packages:
+  - displayName: AR Foundation Remote
+    version: 4.8.7
+    id: com.kyrylokuzyk.arfoundationremote
+  - displayName: AR Foundation
+    version: 4.1.1
+    id: com.unity.xr.arfoundation
+  - displayName: ARCore XR Plugin
+    version: 4.1.1
+    id: com.unity.xr.arcore
+  - displayName: ARKit XR Plugin
+    version: 4.1.1
+    id: com.unity.xr.arkit
   port: 44819
   embeddedImageLibraries: []
   debugSettings:
