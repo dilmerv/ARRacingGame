@@ -21,4 +21,6 @@ public class PlayerItem
     public PlacementState PlacementState = PlacementState.NoSet;
 
     public GameObject Prefab;
+
+    public bool TargetReached = false;
 }

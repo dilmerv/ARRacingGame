@@ -1,11 +1,12 @@
 ﻿using System.Linq;
+using DilmerGames.Core.Singletons;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerMissionManager : MonoBehaviour
+public class PlayerMissionManager : Singleton<PlayerMissionManager>
 {
     [SerializeField]
-    private UnityEvent OnMissionCompleted = new UnityEvent();
+    public UnityEvent OnMissionCompleted = new UnityEvent();
     
     [SerializeField]
     private PlayerMission[] playerMissions = null;
@@ -15,7 +16,28 @@ public class PlayerMissionManager : MonoBehaviour
 
     private PlayerMission currentMission = null;
 
+    public int MissionTargetCount
+    {
+        get
+        {
+            return currentMission == null ? 0 : 
+                currentMission.PlayerItems.Count(i => i.ItemType == ItemType.Flag);
+        }
+    }
+
     private void Awake() => ActivateMission();
+
+    public void HandleMissionCompleted()
+    {
+        var currentTargets = currentMission == null ? 0 : 
+                currentMission.PlayerItems.Count(i => i.ItemType == ItemType.Flag && !i.TargetReached);
+
+        if(currentTargets == 0)
+        {
+            currentMission.PlayerMissionState = PlayerMissionState.Completed;
+            OnMissionCompleted?.Invoke();
+        }
+    }
 
     void Update() 
     {
@@ -28,8 +50,6 @@ public class PlayerMissionManager : MonoBehaviour
     {
         if(currentMission.PlayerItems.All(s => s.PlacementState == PlacementState.Placed))
         {
-            currentMission.PlayerMissionState = PlayerMissionState.Completed;
-            OnMissionCompleted?.Invoke();
             return;
         }
 
@@ -42,7 +62,8 @@ public class PlayerMissionManager : MonoBehaviour
             var go = new GameObject($"{currentStep.ItemType}");
             go.transform.parent = transform.parent;
             var reticle = go.AddComponent<ARPlacementReticle>();
-            reticle.customPlacement = currentStep.Prefab;
+            reticle.placedObject.Prefab = currentStep.Prefab;
+            reticle.placedObject.PlayerItem = currentStep;
             currentStep.PlacementState = PlacementState.PrefabCreated;
 
             reticle.OnObjectPlaced.AddListener(() => 

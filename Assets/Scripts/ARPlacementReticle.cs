@@ -5,7 +5,7 @@ public class ARPlacementReticle : MonoBehaviour
 {
     private const string RAYCAST_LAYER = "ARMeshLiDAR";
 
-    public GameObject customPlacement;
+    public PlacedObjectState placedObject = new PlacedObjectState();
 
     public Vector3 offset = Vector3.zero;
     
@@ -14,8 +14,6 @@ public class ARPlacementReticle : MonoBehaviour
     private Camera arCamera = null;
 
     private GameObject customReticle;
-
-    private GameObject objectPlaced;
 
     void Awake()
     {
@@ -27,7 +25,7 @@ public class ARPlacementReticle : MonoBehaviour
 
     void Update()
     {
-        if(objectPlaced != null) return;
+        if(placedObject.Placement != null) return;
 
         var ray = arCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
         var hasHit = Physics.Raycast(ray, out var hit, float.PositiveInfinity, LayerMask.GetMask(RAYCAST_LAYER));
@@ -56,22 +54,27 @@ public class ARPlacementReticle : MonoBehaviour
 
             if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
             {
-                if (customPlacement != null && objectPlaced == null)
+                if (placedObject != null && placedObject.Placement == null)
                 {
-                    objectPlaced = Instantiate(customPlacement, location, Quaternion.identity);
-                    objectPlaced.transform.parent = transform;
-                    
+                    placedObject.Placement = Instantiate(placedObject.Prefab, location, Quaternion.identity);
+                    placedObject.Placement.transform.parent = transform;
+
                     Logger.Instance.LogInfo("Object Created...");
                     
-                    var carController = objectPlaced.GetComponentInChildren<CarController>();
+                    var carController = placedObject.Placement.GetComponentInChildren<CarController>();
 
                     if(carController != null)
                     {
                         PlayerInputController.Instance.Bind(carController);
                         Logger.Instance.LogInfo("PlayerInputController Bound...");
                     }
+                    
+                    var targetCollisionState = placedObject.Placement.AddComponent<TargetCollisionState>();
+                    targetCollisionState.PlayerItem = placedObject.PlayerItem;
 
                     OnObjectPlaced?.Invoke();
+
+                    customReticle.SetActive(false);
                 }
             }
         }

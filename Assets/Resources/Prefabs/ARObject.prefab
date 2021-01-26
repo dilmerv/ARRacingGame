@@ -5032,7 +5032,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2575662788260421733}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2575662788658749941}
@@ -5064,6 +5064,8 @@ MonoBehaviour:
   minSpeedBeforeTorque: 0.2
   minSpeedBeforeIdle: 0.2
   carRigidBody: {fileID: 2575662788260421658}
+  showStats: 0
+  speedText: {fileID: 0}
 --- !u!54 &2575662788260421658
 Rigidbody:
   m_ObjectHideFlags: 0

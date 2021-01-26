@@ -30,6 +30,8 @@ public class CarController : MonoBehaviour
 
     private CarWheel[] wheels;
 
+    private int targetsCollected = 0;
+
     public enum Direction
     {
         Idle,
