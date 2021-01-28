@@ -58,6 +58,9 @@ public class ARPlacementReticle : MonoBehaviour
                 {
                     placedObject.Placement = Instantiate(placedObject.Prefab, location, Quaternion.identity);
                     placedObject.Placement.transform.parent = transform;
+                    
+                    var placedObjectItem = placedObject.Placement.AddComponent<PlacedObjectItem>();
+                    placedObjectItem.PlayerItem = placedObject.PlayerItem;
 
                     Logger.Instance.LogInfo("Object Created...");
                     
@@ -68,9 +71,6 @@ public class ARPlacementReticle : MonoBehaviour
                         PlayerInputController.Instance.Bind(carController);
                         Logger.Instance.LogInfo("PlayerInputController Bound...");
                     }
-                    
-                    var targetCollisionState = placedObject.Placement.AddComponent<TargetCollisionState>();
-                    targetCollisionState.PlayerItem = placedObject.PlayerItem;
 
                     OnObjectPlaced?.Invoke();
 

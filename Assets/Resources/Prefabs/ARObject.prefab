@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2575662787577382094}
   - component: {fileID: 2575662787577382095}
   - component: {fileID: 2575662787577382088}
-  - component: {fileID: 1842103077321277982}
+  - component: {fileID: 7267627256941572064}
   m_Layer: 0
   m_Name: Tire
   m_TagString: Untagged
@@ -4046,36 +4046,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2575662787577382090}
   m_Mesh: {fileID: 0}
---- !u!146 &1842103077321277982
-WheelCollider:
+--- !u!64 &7267627256941572064
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2575662787577382090}
-  m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.27
-  m_SuspensionSpring:
-    spring: 0.5
-    damper: 0.5
-    targetPosition: 0
-  m_SuspensionDistance: 0
-  m_ForceAppPointDistance: -0.5
-  m_Mass: 20
-  m_WheelDampingRate: 5
-  m_ForwardFriction:
-    m_ExtremumSlip: 1500
-    m_ExtremumValue: 10
-    m_AsymptoteSlip: 1
-    m_AsymptoteValue: 1
-    m_Stiffness: 5
-  m_SidewaysFriction:
-    m_ExtremumSlip: 1000
-    m_ExtremumValue: 100
-    m_AsymptoteSlip: 1
-    m_AsymptoteValue: 1
-    m_Stiffness: 0.5
+  m_Material: {fileID: 13400000, guid: 336a0e8afb37c41c5a844950d6a1f27e, type: 2}
+  m_IsTrigger: 0
   m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &2575662787771490694
 GameObject:
   m_ObjectHideFlags: 0
@@ -4708,7 +4692,6 @@ GameObject:
   - component: {fileID: 2575662788061687982}
   - component: {fileID: 2575662788061687983}
   - component: {fileID: 2575662788061687976}
-  - component: {fileID: 2575662788061687977}
   m_Layer: 0
   m_Name: Bumper
   m_TagString: Untagged
@@ -4993,19 +4976,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2575662788061687978}
   m_Mesh: {fileID: 0}
---- !u!65 &2575662788061687977
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2575662788061687978}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.6353264, y: 0.27111486, z: 0.20155454}
-  m_Center: {x: 0, y: 0, z: 0.00000011920929}
 --- !u!1 &2575662788260421733
 GameObject:
   m_ObjectHideFlags: 0
@@ -5017,6 +4987,7 @@ GameObject:
   - component: {fileID: 2575662788260421732}
   - component: {fileID: 2575662788260421659}
   - component: {fileID: 2575662788260421658}
+  - component: {fileID: 7308792415111366500}
   m_Layer: 0
   m_Name: CarAR
   m_TagString: Untagged
@@ -5059,8 +5030,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4271bf3574537f46a90bef4b6b4a784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  torque: 0.5
+  speed: 15
+  torque: 2
   minSpeedBeforeTorque: 0.2
   minSpeedBeforeIdle: 0.2
   carRigidBody: {fileID: 2575662788260421658}
@@ -5082,6 +5053,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &7308792415111366500
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2575662788260421733}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5447475, y: 0.9688783, z: 3.2655737}
+  m_Center: {x: 0.1031021, y: 0.42225707, z: -0.8172326}
 --- !u!1 &2575662788422365901
 GameObject:
   m_ObjectHideFlags: 0
@@ -5140,7 +5124,6 @@ GameObject:
   - component: {fileID: 2575662788658749942}
   - component: {fileID: 2575662788658749943}
   - component: {fileID: 2575662788658749936}
-  - component: {fileID: 2575662788658749937}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -5156,7 +5139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2575662788658749938}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13430019, y: -0.058, z: -0.045071065}
+  m_LocalPosition: {x: -0.1343002, y: -0.058, z: -0.045071065}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2575662788260421732}
@@ -7105,19 +7088,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2575662788658749938}
   m_Mesh: {fileID: 0}
---- !u!65 &2575662788658749937
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2575662788658749938}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5323105, y: 0.960587, z: 3.1495008}
-  m_Center: {x: 0.23782977, y: 0.4802935, z: -0.77163225}
 --- !u!1 &2575662788699198260
 GameObject:
   m_ObjectHideFlags: 0
@@ -8408,7 +8378,6 @@ GameObject:
   - component: {fileID: 2575662788832378378}
   - component: {fileID: 2575662788832378379}
   - component: {fileID: 2575662788832378388}
-  - component: {fileID: 2575662788832378389}
   m_Layer: 0
   m_Name: Bumper
   m_TagString: Untagged
@@ -8693,19 +8662,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2575662788832378390}
   m_Mesh: {fileID: 0}
---- !u!65 &2575662788832378389
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2575662788832378390}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.6353264, y: 0.13741249, z: 0.2015546}
-  m_Center: {x: 0, y: 0, z: 0.000000029802322}
 --- !u!1 &3668868009294991491
 GameObject:
   m_ObjectHideFlags: 0
@@ -8718,7 +8674,7 @@ GameObject:
   - component: {fileID: 3668868009294991495}
   - component: {fileID: 3668868009294991494}
   - component: {fileID: 3668868009294991489}
-  - component: {fileID: 1842103078593760377}
+  - component: {fileID: 7419233006959628137}
   m_Layer: 0
   m_Name: Tire
   m_TagString: Untagged
@@ -12721,36 +12677,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3668868009294991491}
   m_Mesh: {fileID: 0}
---- !u!146 &1842103078593760377
-WheelCollider:
+--- !u!64 &7419233006959628137
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3668868009294991491}
-  m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.27
-  m_SuspensionSpring:
-    spring: 0.5
-    damper: 0.5
-    targetPosition: 0
-  m_SuspensionDistance: 0
-  m_ForceAppPointDistance: -0.5
-  m_Mass: 20
-  m_WheelDampingRate: 5
-  m_ForwardFriction:
-    m_ExtremumSlip: 1500
-    m_ExtremumValue: 10
-    m_AsymptoteSlip: 1
-    m_AsymptoteValue: 1
-    m_Stiffness: 5
-  m_SidewaysFriction:
-    m_ExtremumSlip: 1000
-    m_ExtremumValue: 100
-    m_AsymptoteSlip: 1
-    m_AsymptoteValue: 1
-    m_Stiffness: 0.5
+  m_Material: {fileID: 13400000, guid: 336a0e8afb37c41c5a844950d6a1f27e, type: 2}
+  m_IsTrigger: 0
   m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &3668868009340587052
 GameObject:
   m_ObjectHideFlags: 0
@@ -12763,7 +12703,7 @@ GameObject:
   - component: {fileID: 3668868009340587048}
   - component: {fileID: 3668868009340587049}
   - component: {fileID: 3668868009340587054}
-  - component: {fileID: 1842103076764677566}
+  - component: {fileID: 5729773080682204169}
   m_Layer: 0
   m_Name: Tire
   m_TagString: Untagged
@@ -16766,36 +16706,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3668868009340587052}
   m_Mesh: {fileID: 0}
---- !u!146 &1842103076764677566
-WheelCollider:
+--- !u!64 &5729773080682204169
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3668868009340587052}
-  m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.27
-  m_SuspensionSpring:
-    spring: 0.5
-    damper: 0.5
-    targetPosition: 0
-  m_SuspensionDistance: 0
-  m_ForceAppPointDistance: -0.5
-  m_Mass: 20
-  m_WheelDampingRate: 5
-  m_ForwardFriction:
-    m_ExtremumSlip: 1500
-    m_ExtremumValue: 10
-    m_AsymptoteSlip: 1
-    m_AsymptoteValue: 1
-    m_Stiffness: 5
-  m_SidewaysFriction:
-    m_ExtremumSlip: 1000
-    m_ExtremumValue: 100
-    m_AsymptoteSlip: 1
-    m_AsymptoteValue: 1
-    m_Stiffness: 0.5
+  m_Material: {fileID: 13400000, guid: 336a0e8afb37c41c5a844950d6a1f27e, type: 2}
+  m_IsTrigger: 0
   m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &3668868009897200532
 GameObject:
   m_ObjectHideFlags: 0
@@ -16808,7 +16732,7 @@ GameObject:
   - component: {fileID: 3668868009897200528}
   - component: {fileID: 3668868009897200529}
   - component: {fileID: 3668868009897200534}
-  - component: {fileID: 1842103078009566026}
+  - component: {fileID: 5196489389531125917}
   m_Layer: 0
   m_Name: Tire
   m_TagString: Untagged
@@ -20811,36 +20735,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3668868009897200532}
   m_Mesh: {fileID: 0}
---- !u!146 &1842103078009566026
-WheelCollider:
+--- !u!64 &5196489389531125917
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3668868009897200532}
-  m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.27
-  m_SuspensionSpring:
-    spring: 0.5
-    damper: 0.5
-    targetPosition: 0
-  m_SuspensionDistance: 0
-  m_ForceAppPointDistance: -0.5
-  m_Mass: 20
-  m_WheelDampingRate: 5
-  m_ForwardFriction:
-    m_ExtremumSlip: 1500
-    m_ExtremumValue: 10
-    m_AsymptoteSlip: 1
-    m_AsymptoteValue: 1
-    m_Stiffness: 5
-  m_SidewaysFriction:
-    m_ExtremumSlip: 1000
-    m_ExtremumValue: 100
-    m_AsymptoteSlip: 1
-    m_AsymptoteValue: 1
-    m_Stiffness: 0.5
+  m_Material: {fileID: 13400000, guid: 336a0e8afb37c41c5a844950d6a1f27e, type: 2}
+  m_IsTrigger: 0
   m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &3668868010238737811
 GameObject:
   m_ObjectHideFlags: 0

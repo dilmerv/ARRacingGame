@@ -368,6 +368,8 @@ MonoBehaviour:
   minSpeedBeforeTorque: 0.01
   minSpeedBeforeIdle: 0.2
   carRigidBody: {fileID: 4192536060875221125}
+  showStats: 0
+  speedText: {fileID: 0}
 --- !u!54 &4192536060875221125
 Rigidbody:
   m_ObjectHideFlags: 0

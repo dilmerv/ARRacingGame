@@ -29,10 +29,12 @@ public class PlayerMissionManager : Singleton<PlayerMissionManager>
 
     public void HandleMissionCompleted()
     {
-        var currentTargets = currentMission == null ? 0 : 
+        var remainingTargetCount = currentMission == null ? 0 : 
                 currentMission.PlayerItems.Count(i => i.ItemType == ItemType.Flag && !i.TargetReached);
 
-        if(currentTargets == 0)
+        Logger.Instance.LogInfo($"Mission Targets remaining {remainingTargetCount}");
+
+        if(remainingTargetCount == 0)
         {
             currentMission.PlayerMissionState = PlayerMissionState.Completed;
             OnMissionCompleted?.Invoke();
@@ -79,13 +81,18 @@ public class PlayerMissionManager : Singleton<PlayerMissionManager>
     {
         if(playerMissions.Length > 0 && currentMission == null)
         {
+            Logger.Instance.LogInfo("Mission Activated...");
+
             currentMission = playerMissions[currentMissionNum];
             currentMission.PlayerMissionState = PlayerMissionState.NoSet;
 
             foreach(var i in currentMission.PlayerItems)
             {
                 i.PlacementState = PlacementState.NoSet;
+                i.TargetReached = false;
             }
+            int targets = currentMission.PlayerItems.Count(i => i.ItemType == ItemType.Flag);
+            Logger.Instance.LogInfo($"Mission Targets required {targets}");
         }
     }
 }

@@ -1,8 +1,10 @@
-﻿using TMPro;
+﻿using DilmerGames.Core.Singletons;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameOptions : MonoBehaviour
+public class GameOptions : Singleton<GameOptions>
 {
     private bool meshVisibilityOn = true;
 
@@ -14,9 +16,16 @@ public class GameOptions : MonoBehaviour
         meshVisibilityOn = !meshVisibilityOn;
         
         button.GetComponentInChildren<TextMeshProUGUI>().text = meshVisibilityOn ? 
-            "MESHING VISIBILITY OFF" : "MESHING VISIBILITY ON";
+            "MESHING OFF" : "MESHING ON";
 
         meshMaterial.color = meshVisibilityOn ? new Color(meshMaterial.color.r, meshMaterial.color.g, meshMaterial.color.b, 1)
         : new Color(meshMaterial.color.r, meshMaterial.color.g, meshMaterial.color.b, 0);
+    }
+
+    public void RestartSession()
+    {
+        //TO DO for now I will restart the scene but I will implement
+        //a good way to restart the AR Session and player mission
+        SceneManager.LoadScene(0);
     }
 }

@@ -104,4 +104,16 @@ public class CarController : MonoBehaviour
         Vector3 velocity = carRigidBody.velocity;
         return Mathf.Abs(velocity.x) >= minSpeedBeforeTorque || Mathf.Abs(velocity.z) >= minSpeedBeforeTorque;
     }
+
+    void OnCollisionEnter(Collision other) 
+    {
+        var placedObjectItem = other.gameObject.GetComponentInParent<PlacedObjectItem>();
+        
+        if(placedObjectItem != null && other.gameObject.layer == LayerMask.NameToLayer("Target"))
+        {
+            placedObjectItem.PlayerItem.TargetReached = true;
+            other.gameObject.SetActive(false);
+            PlayerMissionManager.Instance.HandleMissionCompleted();
+        }
+    }
 }
