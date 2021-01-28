@@ -1,8 +1,7 @@
-﻿using DilmerGames.Core.Singletons;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine;
 
-public class PlayerInputController : Singleton<PlayerInputController>
+public class PlayerInputController : MonoBehaviour
 {
     private bool turnLeft, turnRight, accelerate, reverse;
     
@@ -17,6 +16,7 @@ public class PlayerInputController : Singleton<PlayerInputController>
     {
         if(carController == null) 
         {
+            Logger.Instance.LogInfo("CarController is null...");
             return;
         }
 

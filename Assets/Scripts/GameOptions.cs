@@ -16,7 +16,7 @@ public class GameOptions : Singleton<GameOptions>
         meshVisibilityOn = !meshVisibilityOn;
         
         button.GetComponentInChildren<TextMeshProUGUI>().text = meshVisibilityOn ? 
-            "MESHING OFF" : "MESHING ON";
+            "MESHING ON" : "MESHING OFF";
 
         meshMaterial.color = meshVisibilityOn ? new Color(meshMaterial.color.r, meshMaterial.color.g, meshMaterial.color.b, 1)
         : new Color(meshMaterial.color.r, meshMaterial.color.g, meshMaterial.color.b, 0);
@@ -26,6 +26,6 @@ public class GameOptions : Singleton<GameOptions>
     {
         //TO DO for now I will restart the scene but I will implement
         //a good way to restart the AR Session and player mission
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
     }
 }

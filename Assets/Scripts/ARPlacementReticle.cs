@@ -65,14 +65,6 @@ public class ARPlacementReticle : MonoBehaviour
 
                     Logger.Instance.LogInfo("Object Created...");
                     
-                    var carController = placedObject.Placement.GetComponentInChildren<CarController>();
-
-                    if(carController != null)
-                    {
-                        PlayerInputController.Instance.Bind(carController);
-                        Logger.Instance.LogInfo("PlayerInputController Bound...");
-                    }
-
                     OnObjectPlaced?.Invoke();
 
                     customReticle.SetActive(false);

@@ -44,9 +44,7 @@ public class CarController : MonoBehaviour
     void Awake()
     {
         wheels = GetComponentsInChildren<CarWheel>();
-#if UNITY_EDITOR
-        PlayerInputController.Instance.Bind(this);
-#endif
+        FindObjectOfType<PlayerInputController>().Bind(this);
     }
 
     void Update()
@@ -71,12 +69,16 @@ public class CarController : MonoBehaviour
     {
         carRigidBody.AddForce(transform.forward * speed, ForceMode.Acceleration);
         AddWheelsSpeed(speed);
+
+        Logger.Instance.LogInfo("Accelerate running...");
     }
 
     public void Reverse()
     {
         carRigidBody.AddForce(-transform.forward * speed, ForceMode.Acceleration);;
         AddWheelsSpeed(-speed);
+
+        Logger.Instance.LogInfo("Reverse running...");
     }
 
     public void TurnLeft()
