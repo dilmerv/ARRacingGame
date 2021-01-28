@@ -48,7 +48,8 @@ public class ARPlacementReticle : MonoBehaviour
         {
             var touch = activeTouches[0];
 
-            bool isOverUI = touch.screenPosition.IsPointOverUIObject();
+            // check if we are over UI but ignore the logger label otherwise block it
+            bool isOverUI = touch.finger.screenPosition.IsPointOverUIObject(new string[] { "Logger" });
 
             if (isOverUI) return;
 
