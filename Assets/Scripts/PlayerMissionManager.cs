@@ -25,7 +25,7 @@ public class PlayerMissionManager : Singleton<PlayerMissionManager>
         }
     }
 
-    private void Awake() => ActivateMission();
+    private void Awake() => StartMission();
 
     public void HandleMissionCompleted()
     {
@@ -62,7 +62,7 @@ public class PlayerMissionManager : Singleton<PlayerMissionManager>
         if(currentStep != null && currentStep.PlacementState == PlacementState.NoSet)
         {
             var go = new GameObject($"{currentStep.ItemType}");
-            go.transform.parent = transform.parent;
+            go.transform.parent = transform;
             var reticle = go.AddComponent<ARPlacementReticle>();
             reticle.placedObject.Prefab = currentStep.Prefab;
             reticle.placedObject.PlayerItem = currentStep;
@@ -77,9 +77,15 @@ public class PlayerMissionManager : Singleton<PlayerMissionManager>
         }
     }
 
-    public void ActivateMission()
+    public void StartMission()
     {
-        if(playerMissions.Length > 0 && currentMission == null)
+        // destroy all created objects
+        foreach(Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        if(playerMissions.Length > 0)
         {
             Logger.Instance.LogInfo("Mission Activated...");
 

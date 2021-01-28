@@ -21,11 +21,4 @@ public class GameOptions : Singleton<GameOptions>
         meshMaterial.color = meshVisibilityOn ? new Color(meshMaterial.color.r, meshMaterial.color.g, meshMaterial.color.b, 1)
         : new Color(meshMaterial.color.r, meshMaterial.color.g, meshMaterial.color.b, 0);
     }
-
-    public void RestartSession()
-    {
-        //TO DO for now I will restart the scene but I will implement
-        //a good way to restart the AR Session and player mission
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
-    }
 }
