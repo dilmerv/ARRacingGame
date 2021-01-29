@@ -1,7 +1,6 @@
 ﻿using DilmerGames.Core.Singletons;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOptions : Singleton<GameOptions>
