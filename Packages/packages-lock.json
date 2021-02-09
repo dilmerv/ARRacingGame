@@ -1,20 +1,5 @@
 {
   "dependencies": {
-    "com.kyrylokuzyk.arfoundationremote": {
-      "version": "file:com.kyrylokuzyk.arfoundationremote",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.unity.xr.arfoundation": "3.0.1",
-        "com.unity.xr.arsubsystems": "3.0.0",
-        "com.unity.xr.management": "3.0.4-preview.1",
-        "com.unity.modules.unitywebrequesttexture": "1.0.0",
-        "com.unity.modules.particlesystem": "1.0.0",
-        "com.unity.modules.vr": "1.0.0",
-        "com.unity.modules.imgui": "1.0.0",
-        "com.unity.ugui": "1.0.0"
-      }
-    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
