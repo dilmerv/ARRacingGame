@@ -27,6 +27,15 @@ public class PlayerMissionManager : Singleton<PlayerMissionManager>
 
     private void Awake() => StartMission();
 
+    public bool CarWasPlaced
+    {
+        get
+        {
+            return currentMission.PlayerItems.Any(c => c.ItemType == ItemType.Car && 
+                c.PlacementState == PlacementState.Placed);
+        }
+    }
+
     public void HandleMissionCompleted()
     {
         var remainingTargetCount = currentMission == null ? 0 : 

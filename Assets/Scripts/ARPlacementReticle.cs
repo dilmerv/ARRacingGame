@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class ARPlacementReticle : MonoBehaviour
@@ -8,12 +9,14 @@ public class ARPlacementReticle : MonoBehaviour
     public PlacedObjectState placedObject = new PlacedObjectState();
 
     public Vector3 offset = Vector3.zero;
-    
+
     public UnityEvent OnObjectPlaced = new UnityEvent();
 
     private Camera arCamera = null;
 
     private GameObject customReticle;
+
+    private TextMeshProUGUI reticleOverlayText;
 
     void Awake()
     {
@@ -21,6 +24,7 @@ public class ARPlacementReticle : MonoBehaviour
         customReticle = Instantiate(Resources.Load<GameObject>("Prefabs/Reticle"));
         customReticle.transform.parent = transform;
         customReticle.SetActive(false);
+        reticleOverlayText = customReticle.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     void Update()
@@ -36,7 +40,26 @@ public class ARPlacementReticle : MonoBehaviour
             customReticle.transform.position = hit.point + offset;
             customReticle.transform.up = hit.normal;
 
-            PlaceObject(hit.point);
+            if(PlayerMissionManager.Instance.CarWasPlaced)
+            {
+                // check distances
+                var distance = Vector3.Distance(CarController.Instance.transform.parent.localPosition, transform.GetChild(0).localPosition);
+                reticleOverlayText.text = $"{string.Format("{0:0.#}", distance)}";
+
+                if(distance >= placedObject.PlayerItem.MinDistance)
+                {
+                    GetComponentInChildren<MeshRenderer>().material = GameManager.Instance.GlobalGameSettings.AvailableReticleMaterial;
+                    PlaceObject(hit.point);
+                }
+                else
+                {
+                    GetComponentInChildren<MeshRenderer>().material = GameManager.Instance.GlobalGameSettings.UnavailableReticleMaterial;
+                }
+            }
+            else
+            {
+                PlaceObject(hit.point);
+            }
         }
     }
 

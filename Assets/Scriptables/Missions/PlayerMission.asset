@@ -15,45 +15,45 @@ MonoBehaviour:
   PlayerItems:
   - ItemType: 1
     Priority: 1
-    MinDistance: 0
+    MinDistance: 1
     PlacementState: 2
-    Prefab: {fileID: 1842103077137166150, guid: 9eda4f8c095ae174fbe560a3e93cb8a7,
+    Prefab: {fileID: 8559374095647399935, guid: ae48f087bce7448818bc688883f718b4,
       type: 3}
     TargetReached: 0
   - ItemType: 2
     Priority: 2
-    MinDistance: 0
-    PlacementState: 2
+    MinDistance: 1
+    PlacementState: 1
     Prefab: {fileID: 850315960405456276, guid: 8860a34c7551f42be957dff998749645, type: 3}
     TargetReached: 0
   - ItemType: 2
     Priority: 3
-    MinDistance: 0
-    PlacementState: 2
+    MinDistance: 0.5
+    PlacementState: 0
     Prefab: {fileID: 850315960405456276, guid: 8860a34c7551f42be957dff998749645, type: 3}
     TargetReached: 0
   - ItemType: 2
     Priority: 4
-    MinDistance: 0
-    PlacementState: 2
+    MinDistance: 2
+    PlacementState: 0
     Prefab: {fileID: 850315960405456276, guid: 8860a34c7551f42be957dff998749645, type: 3}
     TargetReached: 0
   - ItemType: 2
     Priority: 5
-    MinDistance: 0
-    PlacementState: 2
+    MinDistance: 1.5
+    PlacementState: 0
     Prefab: {fileID: 850315960405456276, guid: 8860a34c7551f42be957dff998749645, type: 3}
     TargetReached: 0
   - ItemType: 2
     Priority: 6
-    MinDistance: 0
-    PlacementState: 2
+    MinDistance: 1.25
+    PlacementState: 0
     Prefab: {fileID: 850315960405456276, guid: 8860a34c7551f42be957dff998749645, type: 3}
     TargetReached: 0
   - ItemType: 2
     Priority: 7
-    MinDistance: 0
-    PlacementState: 2
+    MinDistance: 3
+    PlacementState: 0
     Prefab: {fileID: 850315960405456276, guid: 8860a34c7551f42be957dff998749645, type: 3}
     TargetReached: 0
   PlayerMissionState: 0
