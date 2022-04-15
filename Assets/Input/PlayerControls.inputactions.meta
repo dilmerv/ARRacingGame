@@ -11,4 +11,4 @@ ScriptedImporter:
   generateWrapperCode: 1
   wrapperCodePath: Assets/Scripts/PlayerControls.cs
   wrapperClassName: PlayerControls
-  wrapperCodeNamespace: 
+  wrapperCodeNamespace: LearnXR.Controllers

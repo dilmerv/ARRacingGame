@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using static PlayerControls;
+using LearnXR.Controllers;
 
-public class PlayerInputController : MonoBehaviour, IPlayerActions
+public class PlayerInputController : MonoBehaviour, PlayerControls.IPlayerActions
 {
     private bool turnLeft, turnRight, accelerate, reverse;
     
