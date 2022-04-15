@@ -1,0 +1,5 @@
+SceneSelector
+
+Not actually an example of anything in ARDK, but rather creates a scene with buttons that lead to the other examples built into the app.
+
+This scene needs to go first in the built scene order to insure that it's the first scene that gets loaded up when the app boots.

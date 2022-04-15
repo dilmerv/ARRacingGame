@@ -1,0 +1,10 @@
+{
+    "name": "ARDK-Editor",
+    "references": [
+        "ARDK"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

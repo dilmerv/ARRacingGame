@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainGameAR.unity
+    path: Assets/Scenes/MainGameAR_ARDK.unity
     guid: 7973d7dc4931b614d832c6e137b466dc
   - enabled: 0
     path: Assets/Scenes/MainGameARTest.unity
