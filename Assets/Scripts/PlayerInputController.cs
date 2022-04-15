@@ -1,15 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using static PlayerControls;
 
-public class PlayerInputController : MonoBehaviour
+public class PlayerInputController : MonoBehaviour, IPlayerActions
 {
     private bool turnLeft, turnRight, accelerate, reverse;
     
     private CarController carController;
 
+    private PlayerControls playerControls;
+
     public void Bind(CarController carController)
     {
         this.carController = carController;
+    }
+
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+        playerControls.Enable();
+        playerControls.Player.SetCallbacks(this);
     }
 
     void FixedUpdate() 
@@ -38,27 +48,27 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
-    public void OnTurnLeft(InputValue inputValue) 
-    { 
-        turnLeft = inputValue.isPressed;
+    public void OnAccelerate(InputAction.CallbackContext context)
+    {
+        accelerate = context.ReadValueAsButton();
+        Logger.Instance.LogInfo($"OnAccelerate...{accelerate}");
+    }
+
+    public void OnReverse(InputAction.CallbackContext context)
+    {
+        reverse = context.ReadValueAsButton();
+        Logger.Instance.LogInfo($"OnReverse...{reverse}");
+    }
+
+    public void OnTurnLeft(InputAction.CallbackContext context)
+    {
+        turnLeft = context.ReadValueAsButton();
         Logger.Instance.LogInfo($"OnTurnLeft...{turnLeft}");
     }
 
-    public void OnTurnRight(InputValue inputValue) 
-    { 
-        turnRight = inputValue.isPressed;
+    public void OnTurnRight(InputAction.CallbackContext context)
+    {
+        turnRight = context.ReadValueAsButton();
         Logger.Instance.LogInfo($"OnTurnRight...{turnRight}");
-    }
-
-    public void OnAccelerate(InputValue inputValue) 
-    {
-        accelerate = inputValue.isPressed;
-        Logger.Instance.LogInfo($"OnAccelerate...{accelerate}");
-    } 
-
-    public void OnReverse(InputValue inputValue) 
-    {
-        reverse = inputValue.isPressed;
-        Logger.Instance.LogInfo($"OnReverse...{reverse}");
     }
 }

@@ -70,16 +70,12 @@ public class CarController : Singleton<CarController>
     {
         carRigidBody.AddForce(transform.forward * speed, ForceMode.Acceleration);
         AddWheelsSpeed(speed);
-
-        Logger.Instance.LogInfo("Accelerate running...");
     }
 
     public void Reverse()
     {
         carRigidBody.AddForce(-transform.forward * speed, ForceMode.Acceleration);;
         AddWheelsSpeed(-speed);
-
-        Logger.Instance.LogInfo("Reverse running...");
     }
 
     public void TurnLeft()
