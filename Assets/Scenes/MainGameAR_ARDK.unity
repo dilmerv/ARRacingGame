@@ -739,6 +739,7 @@ MonoBehaviour:
   playerMissions:
   - {fileID: 11400000, guid: ee4a7d5b8d1fc406c89ac306ab850e5e, type: 2}
   currentMissionNum: 0
+  reticleOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1215479587
 GameObject:
   m_ObjectHideFlags: 0

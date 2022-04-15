@@ -14,6 +14,9 @@ public class PlayerMissionManager : Singleton<PlayerMissionManager>
     [SerializeField]
     private int currentMissionNum = 0;
 
+    [SerializeField]
+    private Vector3 reticleOffset = Vector3.zero;
+
     private PlayerMission currentMission = null;
 
     public int MissionTargetCount
@@ -75,6 +78,7 @@ public class PlayerMissionManager : Singleton<PlayerMissionManager>
             var reticle = go.AddComponent<ARPlacementReticle>();
             reticle.placedObject.Prefab = currentStep.Prefab;
             reticle.placedObject.PlayerItem = currentStep;
+            reticle.offset = reticleOffset;
             currentStep.PlacementState = PlacementState.PrefabCreated;
 
             reticle.OnObjectPlaced.AddListener(() => 

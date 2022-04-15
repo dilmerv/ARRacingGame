@@ -37,10 +37,10 @@ public class ARPlacementReticle : MonoBehaviour
         if(hasHit)
         {
             customReticle.SetActive(true);
-            customReticle.transform.position = hit.point + offset;
+            customReticle.transform.position = hit.point;
             customReticle.transform.up = hit.normal;
 
-            if(PlayerMissionManager.Instance.CarWasPlaced)
+            if (PlayerMissionManager.Instance.CarWasPlaced)
             {
                 // check distances
                 var distance = Vector3.Distance(CarController.Instance.transform.parent.localPosition, transform.GetChild(0).localPosition);
