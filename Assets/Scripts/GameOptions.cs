@@ -1,4 +1,5 @@
 ﻿using DilmerGames.Core.Singletons;
+using Niantic.ARDK.Extensions.Meshing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,16 +9,15 @@ public class GameOptions : Singleton<GameOptions>
     private bool meshVisibilityOn = true;
 
     [SerializeField]
-    private Material meshMaterial;
+    private ARMeshManager arMeshManager;
 
     public void ToggleMeshVisibility(Button button)
     {
+        arMeshManager.SetUseInvisibleMaterial(meshVisibilityOn);
+
         meshVisibilityOn = !meshVisibilityOn;
         
         button.GetComponentInChildren<TextMeshProUGUI>().text = meshVisibilityOn ? 
             "MESHING ON" : "MESHING OFF";
-
-        meshMaterial.color = meshVisibilityOn ? new Color(meshMaterial.color.r, meshMaterial.color.g, meshMaterial.color.b, 1)
-        : new Color(meshMaterial.color.r, meshMaterial.color.g, meshMaterial.color.b, 0);
     }
 }
