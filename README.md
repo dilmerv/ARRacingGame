@@ -12,3 +12,7 @@ A game originally built in AR Foundation to demonstrate how to create an AR raci
 1. MainGameAR_ARDK.unity (Niantic Lightship ARDK AR Racing Game demo scene)
 2. MainGameAR_AR_Foundation.unity (AR Foundation AR Racing Game demo scene)
 3. MainGameAR_Standalone.unity (Standalone scene to test car physics)
+
+
+# :car: Missions
+A scriptable object is included under /Assets/Scriptables/Missions to create new missions, be sure to watch the [YouTube video series](https://www.youtube.com/watch?v=k2bpIXzwcWA&list=PLQMQNmwN3FvzKF1Yycc1WtpHrooTLPjDR) for a step by step process.
