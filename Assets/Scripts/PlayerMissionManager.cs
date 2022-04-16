@@ -6,6 +6,9 @@ using UnityEngine.Events;
 public class PlayerMissionManager : Singleton<PlayerMissionManager>
 {
     [SerializeField]
+    private Camera mainCamera;
+
+    [SerializeField]
     public UnityEvent OnMissionCompleted = new UnityEvent();
     
     [SerializeField]
@@ -13,6 +16,9 @@ public class PlayerMissionManager : Singleton<PlayerMissionManager>
 
     [SerializeField]
     private int currentMissionNum = 0;
+
+    [SerializeField]
+    private Vector3 reticleOffset = Vector3.zero;
 
     private PlayerMission currentMission = null;
 
@@ -73,13 +79,17 @@ public class PlayerMissionManager : Singleton<PlayerMissionManager>
             var go = new GameObject($"{currentStep.ItemType}");
             go.transform.parent = transform;
             var reticle = go.AddComponent<ARPlacementReticle>();
+            reticle.mainCamera = mainCamera;
             reticle.placedObject.Prefab = currentStep.Prefab;
             reticle.placedObject.PlayerItem = currentStep;
+            reticle.offset = reticleOffset;
             currentStep.PlacementState = PlacementState.PrefabCreated;
 
             reticle.OnObjectPlaced.AddListener(() => 
             {
                 currentStep.PlacementState = PlacementState.Placed;
+
+                Logger.Instance.LogInfo($"ItemType: {currentStep.ItemType} placed");
             });
             
             Logger.Instance.LogInfo($"ItemType: {currentStep.ItemType} created");

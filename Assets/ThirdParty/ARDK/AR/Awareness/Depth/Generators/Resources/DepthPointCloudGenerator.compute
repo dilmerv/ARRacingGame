@@ -1,0 +1,72 @@
+﻿// TODO (awetherington) : Is there a way to register this shader as "ARDK/Generators/DepthPointCloudGenerator"?
+
+#pragma kernel Generate
+
+static const uint3 NumThreads = {8, 8, 1};
+
+uint DepthBufferWidth;
+uint DepthBufferHeight;
+float VerticalOffsetPerMeter;
+float4 Intrinsics;
+float4x4 CameraToWorld;
+
+// vars that change per invocation 
+RWStructuredBuffer<float3> PointCloud;
+StructuredBuffer<float> Depth; 
+
+// helper method to get the index into the Depth buffer from the thread index
+int DepthBufferIndexFromId(in uint3 id) 
+{
+    // Check to see if this worker thread is padding
+    if(DepthBufferWidth <= id.x ) {
+        return -1;
+    }
+    if(DepthBufferHeight <= id.y ) {
+        return -1;
+    }
+    
+    return id.x + id.y * DepthBufferWidth;
+}
+
+float3 UnProject(in float2 id, in float depth) 
+{
+    float2 focalLength = float2(Intrinsics.x, Intrinsics.y);
+    float2 principalPoint = float2(Intrinsics.z, Intrinsics.w);
+
+    // First, convert the threadID [0, N] into a pixel coordinate with the centered
+    // principalPoint treated as the origin, so the new range is [-N/2, N/2]
+    float2 idPixelCoord = float2(id.x - principalPoint.x, id.y - principalPoint.y);
+    
+    // Then use similar triangles to determine a metric offset in camera space
+    // Using the fact that: camSpacePos.x / idPixelCoord.x = depth / focalLength.x
+    float2 camSpacePos = depth * float2(idPixelCoord.x/focalLength.x, idPixelCoord.y/focalLength.y);
+
+    // NAR to Unity conversion
+    float4 pointToCamera = float4(camSpacePos.x, -camSpacePos.y, depth, 1);
+
+    // camera to world coordinate
+    float4 pointToWorld = mul(CameraToWorld, pointToCamera);
+    return pointToWorld.xyz;
+}
+
+// For a given Depth sample at a given pixel position, determine the world position
+// the sample represents.
+[numthreads(NumThreads.x, NumThreads.y, NumThreads.z)]
+void Generate(uint3 id : SV_DispatchThreadID)
+{
+    // get the Depth sample
+    int index = DepthBufferIndexFromId(id);
+    if(index == -1){
+        return;
+    }
+    float depth = Depth[index];
+    
+    // calculate the vertical fixup based on the distance from the camera
+    float3 verticalFixup = float3(0,VerticalOffsetPerMeter * depth,0);
+
+    // Unproject
+    float3 position = UnProject(float2(id.x, id.y), depth);
+    
+    // apply the vertial fixup and save the value into the point cloud buffer
+    PointCloud[index] = position + verticalFixup;
+}
