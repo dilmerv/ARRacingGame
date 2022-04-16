@@ -198,7 +198,7 @@ PrefabInstance:
     - target: {fileID: 4544129020768840140, guid: 9f82ecc5afc3c4c2695d9cf37d46f25c,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4544129020768840141, guid: 9f82ecc5afc3c4c2695d9cf37d46f25c,
         type: 3}
@@ -738,6 +738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ed60a97ebdf4d1980d14f3563a9df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1743714228}
   OnMissionCompleted:
     m_PersistentCalls:
       m_Calls:

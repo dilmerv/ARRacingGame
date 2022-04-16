@@ -12,7 +12,9 @@ public class ARPlacementReticle : MonoBehaviour
 
     public UnityEvent OnObjectPlaced = new UnityEvent();
 
-    private Camera arCamera = null;
+    private bool objectPlaced = false;
+
+    public Camera mainCamera = null;
 
     private GameObject customReticle;
 
@@ -20,19 +22,21 @@ public class ARPlacementReticle : MonoBehaviour
 
     void Awake()
     {
-        arCamera = FindObjectOfType<Camera>();
         customReticle = Instantiate(Resources.Load<GameObject>("Prefabs/Reticle"));
         customReticle.transform.parent = transform;
+        customReticle.transform.position = Vector3.zero;
         customReticle.SetActive(false);
         reticleOverlayText = customReticle.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     void Update()
     {
-        if(placedObject.Placement != null) return;
+        if(placedObject.Placement != null || objectPlaced) return;
 
-        var ray = arCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
-        var hasHit = Physics.Raycast(ray, out var hit, float.PositiveInfinity, LayerMask.GetMask(RAYCAST_LAYER));
+        Logger.Instance.LogInfo($"{mainCamera.transform.position}");
+
+        var ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
+        var hasHit = Physics.Raycast(ray, out var hit, 10, LayerMask.GetMask(RAYCAST_LAYER));
 
         if(hasHit)
         {
@@ -43,7 +47,7 @@ public class ARPlacementReticle : MonoBehaviour
             if (PlayerMissionManager.Instance.CarWasPlaced)
             {
                 // check distances
-                var distance = Vector3.Distance(CarController.Instance.transform.parent.localPosition, transform.GetChild(0).localPosition);
+                var distance = Vector3.Distance(CarController.Instance.transform.position, transform.GetChild(0).position);
                 reticleOverlayText.text = $"{string.Format("{0:0.#}", distance)}";
 
                 if(distance >= placedObject.PlayerItem.MinDistance)
@@ -89,6 +93,7 @@ public class ARPlacementReticle : MonoBehaviour
                     Logger.Instance.LogInfo("Object Created...");
                     
                     OnObjectPlaced?.Invoke();
+                    objectPlaced = true;
 
                     customReticle.SetActive(false);
                 }
